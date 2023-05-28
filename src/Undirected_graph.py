@@ -1,12 +1,9 @@
-import Graph
-import Edge
+from Undirected_graph import Directed_Graph
+from Edge import Edge
 
-class Undirected_graph(Graph):
+class Undirected_Graph(Directed_Graph):
 
     def add_edge(self, edge):
-        """
-        Adds a new edge to the graph.
-        """
-        Graph.agregar_arista(self, edge)
-        edge_inverted = Edge(edge.get_destino(), edge.get_origen(), edge.get_peso())
-        Graph.agregar_arista(self, edge_inverted)
+        Directed_Graph.add_edge(self, edge)
+        edge_inverted = Edge(edge.get_destination(), edge.get_origin(), edge.get_cost())
+        Directed_Graph.add_edge(self, edge_inverted)
