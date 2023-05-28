@@ -1,4 +1,5 @@
 import Graph
+import Edge
 
 class Undirected_graph(Graph):
 
