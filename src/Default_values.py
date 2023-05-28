@@ -26,4 +26,5 @@ def build_graph(graph_class):
     return g
 
 G1 = build_graph(Directed_Graph)
-print( G1)
+print(G1)
+G1.show_graph()
