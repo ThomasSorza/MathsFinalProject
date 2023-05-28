@@ -25,10 +25,10 @@ class Grafo_Dirigido:
         else:
             raise ValueError("El vértice ya existe en el grafo")
 
-    def agregar_arista(self, origen, destino, peso):
+    def agregar_arista(self, edge):
         
-        origen = origen.get_origen()
-        destino = destino.get_destino()
+        origen = edge.get_origen()
+        destino = edge.get_destino()
         if origen not in self.grafo_dict:
             raise ValueError(f"Vertice {origen.get_name()} no existe en el grafo")
         if destino not in self.grafo_dict:
@@ -63,4 +63,3 @@ class Grafo_Dirigido:
         for origen in self.grafo_dict:
             for destino in self.grafo_dict[origen]:
                 all_edges += f'{origen.get_name()} --> {destino.get_name()}\n'
-        return all_edges
