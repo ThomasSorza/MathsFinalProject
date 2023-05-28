@@ -1,8 +1,8 @@
 from Vertex import Vertex
 from Edge import Edge
 
-class Directed_Graph:
 
+class Directed_Graph:
     def __init__(self):
         self.graph_dict = {}
 
@@ -19,12 +19,12 @@ class Directed_Graph:
             raise ValueError(f"Vertice {origin.get_name()} no existe en el grafo.")
         if destination not in self.graph_dict:
             raise ValueError(f"Vertice {destination.get_name()} no existe en el grafo.")
-        self.graph_dict[origin].append(destination)
+        self.graph_dict[origin].append(edge) # modified
 
     def is_vertex_in_graph(self, vertex):
         return vertex in self.graph_dict
     
-    def get_vertex(self, vertex_name ):
+    def get_vertex(self, vertex_name ):#modified
         for v in self.graph_dict:
             if vertex_name == v.get_name():
                 return v
@@ -37,6 +37,8 @@ class Directed_Graph:
     def __str__(self):
         all_edges = ''
         for origin in self.graph_dict:
-            for destination in self.graph_dict[origin]:
-                all_edges += f'{origin.get_name()} --> {destination.get_name()}\n'
+            for edge in self.graph_dict[origin]: # modified
+                destination = edge.get_destination()
+                cost = edge.get_cost() # modified now with cost
+                all_edges += f'{origin.get_name()} --({cost})--> {destination.get_name()}\n'
         return all_edges

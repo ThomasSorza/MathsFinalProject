@@ -16,4 +16,4 @@ class Edge:
         return self.cost
     
     def __str__(self):
-        return self.origin.get_name() + " --> " + self.destination.get_name() + " (" + str(self.cost) + ")"
+        return f'{self.origin.get_name()} --> {self.destination.get_name()} ({str(self.cost)})'
