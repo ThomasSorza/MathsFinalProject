@@ -1,10 +1,13 @@
-class Grafo:
+class Grafo_Dirigido:
+    
     def __init__(self):
-        self.nodos = {}
-        self.aristas = []
+        self.grafo_dict = {}
 
-    def agregar_nodo(self, nodo_id, informacion):
-        self.nodos[nodo_id] = informacion
+    def agregar_vertice(self, vertice):
+        if vertice not in self.grafo_dict:
+            self.grafo_dict[vertice] = []
+        else:
+            return "El vertex ya existe"
 
     def agregar_arista(self, origen, destino, peso):
         self.aristas.append((origen, destino, peso))
