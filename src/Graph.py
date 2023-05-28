@@ -1,3 +1,6 @@
+import Vertex
+import Edge
+
 class Grafo_Dirigido:
     """
     Clase que representa un grafo dirigido. Se utiliza un diccionario 
@@ -19,14 +22,45 @@ class Grafo_Dirigido:
         """
         if vertice not in self.grafo_dict:
             self.grafo_dict[vertice] = []
+        else:
+            raise ValueError("El vértice ya existe en el grafo")
 
     def agregar_arista(self, origen, destino, peso):
+        
+        origen = origen.get_origen()
+        destino = destino.get_destino()
+        if origen not in self.grafo_dict:
+            raise ValueError(f"Vertice {origen.get_name()} no existe en el grafo")
+        if destino not in self.grafo_dict:
+            raise ValueError(f"Vertice {destino.get_name()} no existe en el grafo")
+        self.grafo_dict[origen].append(destino)
+
+    def existe_vertice_en_grafo(self, vertice):
         """
-        Agrega una arista al grafo.
+        Verifica si un vértice existe en el grafo.
 
         Args:
-        origen: El vértice de origen de la arista.
-        destino: El vértice de destino de la arista.
-        peso: Peso de la arista.
+        vertice: El vértice a verificar
+
+        Returns:
+        --------
+        (bool): True si el vértice existe en el grafo, False en caso contrario.
         """
-        self.aristas.append((origen, destino, peso))
+        return vertice in self.grafo_dict
+    
+    def get_vertex(self, vertex_name ):
+        for vertex in self.grafo_dict:
+            if vertex_name == vertex.get_name():
+                return vertex
+        print(f'El vertice {vertex_name} no existe en el grafo')
+
+    #para los nodos vecinos o nodos hijos si vemos el grafo como un arbol
+    def get_sons(self, vertex):
+        return self.grafo_dict[vertex]
+    
+    def __str__(self):
+        all_edges = ''
+        for origen in self.grafo_dict:
+            for destino in self.grafo_dict[origen]:
+                all_edges += f'{origen.get_name()} --> {destino.get_name()}\n'
+        return all_edges
