@@ -47,8 +47,7 @@ class Directed_Graph:
         pos = nx.spring_layout(G, k=0.5, iterations=50)
         plt.figure(figsize=(8, 6))
         nx.draw(G, pos, with_labels=True, node_size=3000, node_color='#0365C0',
-                font_size=10, font_weight='bold', edge_color='#838383', width=2,
-                style='dashed')
+                font_size=10, font_weight='bold', edge_color='#838383', width=2)
         labels = nx.get_edge_attributes(G,'weight')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=8)
         
