@@ -35,6 +35,7 @@ class Directed_Graph:
     def get_neighbors(self, vertex):
         return self.graph_dict[vertex]
     
+    
     def show_graph(self):
         G = nx.Graph()
         for vertex in self.graph_dict:
@@ -44,12 +45,16 @@ class Directed_Graph:
                 destination = edge.get_destination()
                 cost = edge.get_cost()
                 G.add_edge(vertex.get_name(), destination.get_name(), weight=cost)
-        pos = nx.spring_layout(G)
-        nx.draw(G, pos, with_labels=True)
+        pos = nx.spring_layout(G, k=0.5, iterations=50)
+        plt.figure(figsize=(8, 6))
+        nx.draw(G, pos, with_labels=True, node_size=3000, node_color='#0365C0',
+                font_size=10, font_weight='bold', edge_color='#838383', width=2,
+                style='dashed')
         labels = nx.get_edge_attributes(G,'weight')
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=8)
+        
         plt.show()
-    
+
     def __str__(self):
         all_edges = ''
         for origin in self.graph_dict:
