@@ -1,4 +1,5 @@
 from Directed_Graph import Directed_Graph
+from Undirected_Graph import Undirected_Graph
 from Edge import Edge
 from Vertex import Vertex
 
@@ -25,6 +26,6 @@ def build_graph(graph_class):
     g.add_edge(Edge(g.get_vertex('Consulta_saldo'), g.get_vertex('Fin'), 1))
     return g
 
-G1 = build_graph(Directed_Graph)
+G1 = build_graph(Undirected_Graph)
 print(G1)
 G1.show_graph()
