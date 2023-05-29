@@ -21,7 +21,6 @@ class Directed_Graph:
         if destination not in self.graph_dict:
             raise ValueError(f"Vertice {destination.get_name()} no existe en el grafo.")
         self.graph_dict[origin].append(edge)
-        self.graph_dict[destination].append(edge)
 
     def is_vertex_in_graph(self, vertex):
         return vertex in self.graph_dict
@@ -61,5 +60,5 @@ class Directed_Graph:
             for edge in self.graph_dict[origin]:
                 destination = edge.get_destination()
                 cost = edge.get_cost()
-                all_edges += f'{origin.get_name()} --({cost})-- {destination.get_name()}\n'
+                all_edges += f'{origin.get_name()} --({cost})--> {destination.get_name()}\n'
         return all_edges

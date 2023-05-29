@@ -14,11 +14,11 @@ def build_graph(graph_class):
     g.add_edge(Edge(g.get_vertex('Insertar_tarjeta'), g.get_vertex('Retirar'), 1))
     g.add_edge(Edge(g.get_vertex('Insertar_tarjeta'), g.get_vertex('Consulta_saldo'), 1))
     g.add_edge(Edge(g.get_vertex('Insertar_tarjeta'), g.get_vertex('Ingreso_cuenta'), 1))
-    g.add_edge(Edge(g.get_vertex('Transferencia'), g.get_vertex('Numero_cuenta'), 1))
+    g.add_edge(Edge(g.get_vertex('Transferencia'), g.get_vertex('Tipo_cuenta'), 1))
     g.add_edge(Edge(g.get_vertex('Retirar'), g.get_vertex('Numero_cuenta'), 1))
     g.add_edge(Edge(g.get_vertex('Retirar'), g.get_vertex('Tipo_cuenta'), 1))
-    g.add_edge(Edge(g.get_vertex('Numero_cuenta'), g.get_vertex('Tipo_cuenta'), 1))
-    g.add_edge(Edge(g.get_vertex('Tipo_cuenta'), g.get_vertex('Ingrese_pin'), 1))
+    g.add_edge(Edge(g.get_vertex('Tipo_cuenta'), g.get_vertex('Numero_cuenta'), 1))
+    g.add_edge(Edge(g.get_vertex('Numero_cuenta'), g.get_vertex('Ingrese_pin'), 1))
     g.add_edge(Edge(g.get_vertex('Ingreso_cuenta'), g.get_vertex('Cambio_pin'), 1))
     g.add_edge(Edge(g.get_vertex('Cambio_pin'), g.get_vertex('Ingrese_pin'), 1))
     g.add_edge(Edge(g.get_vertex('Ingrese_pin'), g.get_vertex('Consulta_saldo'), 1))
@@ -26,6 +26,6 @@ def build_graph(graph_class):
     g.add_edge(Edge(g.get_vertex('Consulta_saldo'), g.get_vertex('Fin'), 1))
     return g
 
-G1 = build_graph(Undirected_Graph)
+G1 = build_graph(Directed_Graph)
 print(G1)
 G1.show_graph()
