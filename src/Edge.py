@@ -1,19 +1,19 @@
 from Vertex import Vertex
 
 class Edge:
-    def __init__(self, origin, destination, cost):
-        self.origin = origin
-        self.destination = destination
+    def __init__(self, v1, v2, cost=1):
+        self.v1 = v1
+        self.v2 = v2
         self.cost = cost
 
-    def get_origin(self):
-        return self.origin
-    
-    def get_destination(self):
-        return self.destination
+    def get_v1(self):
+        return self.v1
+
+    def get_v2(self):
+        return self.v2
     
     def get_cost(self):
         return self.cost
-    
+
     def __str__(self):
-        return f'{self.origin.get_name()} --> {self.destination.get_name()} ({str(self.cost)})'
+        return f"{self.v1.get_name()} --({self.cost})--> {self.v2.get_name()}"
