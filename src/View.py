@@ -1,5 +1,6 @@
 from Directed_Graph import Directed_Graph
 from Default_values import Default_values
+from Edge import Edge
 
 class View:
     def __init__(self):
@@ -11,40 +12,73 @@ class View:
    # def 
 
 class ViewMenu:
-
-    def menuPrincipal():
+    def menuPrincipal(self):
         while True:
-            print("*** Bienvenido a nuestro Menú Principal *** \n1. Iniciar con valores preterminados\n2. Ingresar valores\n3. Mostrar Grafo\n\n0. Salir\n")
+            print("*** Bienvenido a nuestro Menú Principal ***")
+            print("1. Iniciar con valores preterminados")
+            print("2. Ingresar valores")
+            print("3. Mostrar Grafo")
+            print("4. Mostrar transacciones con menos tiempo")
+            print("5. Calcular tiempo en la fila")
+            print("0. Salir")
+            
             opcion = input("Ingrese una opción: ")
 
             if opcion == "1":
-                print("Hola1")
-                menuTarjeta()
+                self.menuShowGrafo()
+
             elif opcion == "2":
-                print("Ha seleccionado la Opción 2")
-                # Aquí puedes colocar el código correspondiente a la opción 2
+                self.menuObtainData()
         
             elif opcion == "3":
-                print("Ha seleccionado la Opción 3")
-                # Crear una instancia de la clase View
-                v = View()
-                v.display_graph()
-            
-                print("No sucede nada")
-    
+                self.menuGrafo
+
+            elif opcion == "4":
+                self.menuLestTime
+
+            elif opcion == "5":
+                self.tiempoEnFila
+
             elif opcion == "0":
                 print("Todo bien")
                 break
             else:
                 print("Opción inválida. Por favor, ingrese una opción válida.")
-    
-    if __name__ == "__main__":
-        print("HolaMundo")
-        menuPrincipal()
 
+    def menuShowGrafo(self):
+        secondOption = input("Quieres ver el grafo de manera:\n1. Gráfica\n2. Por consola")
+        if secondOption == "1":
+            Directed_Graph.show_graph()
 
+        elif secondOption == "2":
+            print(Default_values.G1)
 
+    def menuObtainData():
+        print("Ingrese las operaciones propias")
+        input("Ingrese el Nombre del nodo")
+        print("\n\nIngrese la arista:")
+        Edge(input("Nombre del nodo inicio"), input("Nombre del nodo salida"))
+        print("El peso es ")
 
+    def menuGrafo():
+        print("A continuación se mostrará el grafo")
+        v = View()
+        v.display_graph()
+
+    def menuLestTime():
+        print("Las operaciones con menor tiempo fueron: " + "con BFS" + " y " + " con DFS")
+
+    def tiempoEnFila():
+        option = input("Seleccione una de las opciones")
+        if option == "1":
+            input("Ingrese la cantidad de personas en la fila.")
+        elif option =="2":
+            input("Calcular el tiempo de la cola")
+
+if __name__ == "__main__":
+    print("Hola Mundo")
+    menu = ViewMenu()
+    menu.menuPrincipal()
 
     """def menuTransferencia():
         #print("Por favor ingrese el numero de cuenta")
