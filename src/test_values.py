@@ -4,6 +4,15 @@ from Edge import Edge
 from Vertex import Vertex
 
 def build_graph(graph):
+    """
+    Builds a graph based on the provided graph class.
+
+    Args:
+    graph: The class of the graph to build.
+
+    Returns:
+    The generated graph instance.
+    """
     g = graph()
     for v in ('inicio','transferencia', 'retirar', 'insertar_tarjeta', 'consulta_saldo', 'ingreso_cuenta', 'tipo_cuenta', 'numero_cuenta', 'cambio_pin', 'ingrese_pin', 'fin'):
         g.add_vertex(Vertex(v))
@@ -20,25 +29,10 @@ def build_graph(graph):
     g.add_edge(Edge(g.get_vertex('tipo_cuenta'), g.get_vertex('numero_cuenta'),40))
     g.add_edge(Edge(g.get_vertex('numero_cuenta'), g.get_vertex('ingrese_pin'),1))
     g.add_edge(Edge(g.get_vertex('ingreso_cuenta'), g.get_vertex('cambio_pin'),35))
-    g.add_edge(Edge(g.get_vertex('cambio_pin'), g.get_vertex('ingrese_pin'),1))
-    g.add_edge(Edge(g.get_vertex('consulta_saldo'), g.get_vertex('ingrese_pin'),1))
-    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('consulta_saldo'),1))
-    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('ingrese_pin'),1))
-    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('fin'),1))
-    
+    g.add_edge(Edge(g.get_vertex('cambio_pin'), g.get_vertex('ingrese_pin'),23))
+    g.add_edge(Edge(g.get_vertex('consulta_saldo'), g.get_vertex('ingrese_pin'),22))
+    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('consulta_saldo'),22))
+    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('ingrese_pin'),30))
+    g.add_edge(Edge(g.get_vertex('ingrese_pin'), g.get_vertex('fin'),29))
+
     return g
-
-""" G1 = build_graph(Directed_Graph)
-print(G1)
-
-G1.show_graph()
-
-print('Ruta mas corto usando BFS: entre inicio y fin ')
-spath = G1.BFS(G1.get_vertex('inicio'), G1.get_vertex('fin'))
-for v in spath:
-    print(f'{v.get_name()} ', end='-> ')
-
-print('\n DFS: entre inicio y fin')
-path_1 = G1.DFS_path( G1.get_vertex('inicio'), G1.get_vertex('fin'), [], None)
-for v in path_1:
-    print(f'"{v.get_name()}"', end=' ') """

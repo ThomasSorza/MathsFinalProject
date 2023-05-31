@@ -5,15 +5,34 @@ from Edge import Edge
 
 
 class Directed_Graph:
+    """
+    Representa un grafo dirigido con una lista de adyacencia.
+    """
+
     def __init__(self):
+        """
+        Inicializa un nuevo objeto Directed_Graph con un diccionario vacío.
+        """
         self.graph_dict = {}
 
     def add_vertex(self, vertex):
+        """
+        Añade un nuevo nodo al grafo.
+
+        Parámetros:
+            vertex (Vertex): El nodo que se agregará al grafo.
+        """
         if vertex in self.graph_dict:
             return "Vertex already in graph"
         self.graph_dict[vertex] = []
 
     def add_edge(self, edge):
+        """
+        Añade una nueva arista al grafo.
+
+        Parámetros:
+            edge (Edge): La arista que se agregará al grafo.
+        """
         v1 = edge.get_v1()
         v2 = edge.get_v2()
         if v1 not in self.graph_dict:
@@ -23,28 +42,58 @@ class Directed_Graph:
         self.graph_dict[v1].append(v2)
 
     def is_vertex_in(self, vertex):
+        """
+        Verifica si un nodo se encuentra en el grafo.
+
+        Parámetros:
+            vertex (Vertex): El nodo que se verificará.
+
+        Retorna:
+            True si el nodo se encuentra en el grafo, False en caso contrario.
+        """
         return vertex in self.graph_dict
 
     def get_vertex(self, vertex_name):
+        """
+        Obtiene un nodo del grafo por nombre.
+
+        Parámetros:
+            vertex_name (str): El nombre del nodo que se va a buscar.
+
+        Retorna:
+            El nodo con el nombre especificado si se encuentra en el grafo, None en caso contrario.
+        """
         for v in self.graph_dict:
             if vertex_name == v.get_name():
                 return v
         print(f'Vertex {vertex_name} does not exist')
 
     def get_neighbors(self, vertex):
+        """
+        Obtiene la lista de vecinos de un nodo.
+
+        Parámetros:
+            vertex (Vertex): El nodo del cual se va a buscar la lista de vecinos.
+
+        Retorna:
+            Una lista con la instancia de los vecinos del nodo.
+        """
         return self.graph_dict[vertex]
 
 
-    #algoritmo de Busqueda Breadth First Search
     def BFS(self, start, end):
-        '''
-        graph - Graph object
-        start - Origen vertex/node
-        end - Destination vertex/node
-        '''
+        """
+        Ejecuta el algoritmo BFS (Breadth First Search) para encontrar la ruta más corta desde el nodo de inicio hasta el nodo de fin.
+
+        Parámetros:
+            start (Vertex): El nodo de inicio.
+            end (Vertex): El nodo de fin.
+
+        Retorna:
+            Una lista con el recorrido desde el nodo de inicio hasta el nodo de fin.
+        """
         path = [start]
         queue = [path]
-        #run all the queue
         while queue:
             current_path = queue.pop(0)
             if current_path[-1] == end:
@@ -54,21 +103,34 @@ class Directed_Graph:
                     new_path = current_path + [next_vertex]
                     queue.append(new_path)
 
-    #algoritmo de Busqueda Depth First Search
     def DFS_path(self, start, end, path, best):
+        """
+        Ejecuta el algoritmo DFS (Depth First Search) para encontrar la ruta más corta desde el nodo de inicio hasta el nodo de fin.
+
+        Parámetros:
+            start (Vertex): El nodo de inicio.
+            end (Vertex): El nodo de fin.
+            path (list): El camino actual en la recursión.
+            best (list): El mejor camino encontrado hasta ahora.
+
+        Retorna:
+            Una lista con el recorrido desde el nodo de inicio hasta el nodo de fin.
+        """
         path = path + [start]
-        # base case
         if start == end:
             return path
         for v in self.get_neighbors(start):
             if v not in path:
-                if best == None or len(path) < len(best):
-                    new_path = self.DFS_path( v,  end, path, best)
+                if best is None or len(path) < len(best):
+                    new_path = self.DFS_path(v, end, path, best)
                     if new_path is not None:
                         best = new_path
         return best
 
     def show_graph(self):
+        """
+        Muestra una representación gráfica del grafo utilizando la biblioteca NetworkX y Matplotlib.
+        """
         G = nx.DiGraph()
 
         for vertex in self.graph_dict:
@@ -78,30 +140,25 @@ class Directed_Graph:
                 G.add_edge(vertex.get_name(), neighbor.get_name())
 
         pos = nx.spring_layout(G)
-        nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_cmap=plt.cm.Blues, arrows=True, node_size=3000)
+        nx.draw(
+            G,
+            pos,
+            with_labels=True,
+            node_color='lightblue',
+            edge_cmap=plt.cm.Blues,
+            arrows=True,
+            node_size=3000
+        )
         plt.title("Representación de un cajero con un grafo dirigido")
         plt.show()
-    
-    """ def show_graph(self):
-        G = nx.Graph()
-        for vertex in self.graph_dict:
-            G.add_node(vertex.get_name())
-        for vertex, edges in self.graph_dict.items():
-            for edge in edges:
-                destination = edge.get_v2()
-                cost = edge.get_cost()
-                G.add_edge(vertex.get_name(), destination.get_name(), weight=cost)
-        pos = nx.spring_layout(G, k=0.5, iterations=50)
-        plt.figure(figsize=(8, 6))
-        nx.draw(G, pos, with_labels=True, node_size=3000, node_color='#0365C0',
-                font_size=10, font_weight='bold', edge_color='#838383', width=2,
-                style='dashed')
-        labels = nx.get_edge_attributes(G,'weight')
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=8)
-        
-        plt.show() """
 
     def __str__(self):
+        """
+        Retorna una representación en forma de cadena de texto del grafo, mostrando todas las aristas.
+
+        Retorna:
+            str: La representación del grafo como una cadena de texto.
+        """
         all_edges = ''
         for v1 in self.graph_dict:
             for v2 in self.graph_dict[v1]:
