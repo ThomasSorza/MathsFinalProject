@@ -78,9 +78,28 @@ class Directed_Graph:
                 G.add_edge(vertex.get_name(), neighbor.get_name())
 
         pos = nx.spring_layout(G)
-        nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_cmap=plt.cm.Blues, arrows=True)
+        nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_cmap=plt.cm.Blues, arrows=True, node_size=3000)
+        plt.title("Representación de un cajero con un grafo dirigido")
         plt.show()
-
+    
+    """ def show_graph(self):
+        G = nx.Graph()
+        for vertex in self.graph_dict:
+            G.add_node(vertex.get_name())
+        for vertex, edges in self.graph_dict.items():
+            for edge in edges:
+                destination = edge.get_v2()
+                cost = edge.get_cost()
+                G.add_edge(vertex.get_name(), destination.get_name(), weight=cost)
+        pos = nx.spring_layout(G, k=0.5, iterations=50)
+        plt.figure(figsize=(8, 6))
+        nx.draw(G, pos, with_labels=True, node_size=3000, node_color='#0365C0',
+                font_size=10, font_weight='bold', edge_color='#838383', width=2,
+                style='dashed')
+        labels = nx.get_edge_attributes(G,'weight')
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=8)
+        
+        plt.show() """
 
     def __str__(self):
         all_edges = ''
@@ -88,5 +107,3 @@ class Directed_Graph:
             for v2 in self.graph_dict[v1]:
                 all_edges += v1.get_name() + '---->' + v2.get_name() + '\n'
         return all_edges
-
-

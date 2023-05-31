@@ -28,17 +28,17 @@ def build_graph(graph):
     
     return g
 
-G1 = build_graph(Directed_Graph)
+""" G1 = build_graph(Directed_Graph)
 print(G1)
 
-print('BFS:')
+G1.show_graph()
+
+print('Ruta mas corto usando BFS: entre inicio y fin ')
 spath = G1.BFS(G1.get_vertex('inicio'), G1.get_vertex('fin'))
 for v in spath:
     print(f'{v.get_name()} ', end='-> ')
 
-print('\nDFS:')
+print('\n DFS: entre inicio y fin')
 path_1 = G1.DFS_path( G1.get_vertex('inicio'), G1.get_vertex('fin'), [], None)
 for v in path_1:
-    print(f'"{v.get_name()}"', end=' ')
-
-G1.show_graph()
+    print(f'"{v.get_name()}"', end=' ') """
