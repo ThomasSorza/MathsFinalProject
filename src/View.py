@@ -1,5 +1,7 @@
+from Undirected_graph import Undirected_Graph
 from Directed_Graph import Directed_Graph
 from Default_values import Default_values
+from Vertex import Vertex
 from Edge import Edge
 
 class View:
@@ -9,10 +11,38 @@ class View:
     def display_graph(self):
         self.graph.show_graph()
 
-   # def 
+    def add_vertex_edge(self):
+        # Solicitar información al usuario
+        name = input("Ingrese el nombre del nodo: ")
+        origin_name = input("Ingrese el nombre del nodo de origen de la arista: ")
+        destination_name = input("Ingrese el nombre del nodo de destino de la arista: ")
+        cost = float(input("Ingrese el costo de la arista: "))
+
+        # Buscar o crear los nodos correspondientes
+        origin = self.graph.get_vertex(origin_name)
+        if origin is None:
+            origin = Vertex(origin_name)
+            self.graph.add_vertex(origin)
+
+        destination = self.graph.get_vertex(destination_name)
+        if destination is None:
+            destination = Vertex(destination_name)
+            self.graph.add_vertex(destination)
+
+        # Crear la arista
+        edge = Edge(origin, destination, cost)
+
+        # Agregar la arista al grafo
+        self.graph.add_edge(edge)
+
+        #Agregar instancia de la vista
+        self.v = View()
 
 class ViewMenu:
+    v = View()
+
     def menuPrincipal(self):
+
         while True:
             print("*** Bienvenido a nuestro Menú Principal ***")
             print("1. Iniciar con valores preterminados")
@@ -28,10 +58,13 @@ class ViewMenu:
                 self.menuShowGrafo()
 
             elif opcion == "2":
-                self.menuObtainData()
+                print("Ha seleccionado la Opción 2")
+                v.add_vertex_edge()
         
             elif opcion == "3":
-                self.menuGrafo
+                print("Ha seleccionado la Opción 3")
+                v.display_graph()
+                print("No sucede nada")
 
             elif opcion == "4":
                 self.menuLestTime
@@ -62,7 +95,6 @@ class ViewMenu:
 
     def menuGrafo():
         print("A continuación se mostrará el grafo")
-        v = View()
         v.display_graph()
 
     def menuLestTime():
@@ -102,8 +134,3 @@ if __name__ == "__main__":
             elif optionTarjeta == "2":
                 print("La buena")
             break"""
-
-
-
-  
-    
